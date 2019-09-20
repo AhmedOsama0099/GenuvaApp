@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Select your seats please"
+            android:textColor="@color/Blue"
+            android:textSize="30sp" />
+        <GridView
+            android:id="@+id/grid_View_seats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="5"
+            />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="5dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_seat_green"
+                    android:layout_margin="4dp"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/Blue"
+                    android:textSize="13sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_seat_red"
+                    android:layout_margin="4dp"
+
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Reversed"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/Blue"
+                    android:textSize="13sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chair"
+                    android:layout_margin="4dp"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Selected"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/Blue"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="5dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Class"
+                    android:layout_marginStart="7dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/Blue"
+                    android:id="@+id/first_class_txt"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Second Class"
+                    android:layout_marginStart="7dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/Blue"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/second_class_txt"
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Third Class"
+                    android:layout_marginEnd="7dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/Blue"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="false"
+                    android:id="@+id/third_class_txt"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/first_class_txt"
+                    android:layout_alignStart="@+id/first_class_txt"
+                    android:layout_alignEnd="@+id/first_class_txt"
+                    android:gravity="center"
+                    android:text="100LE"
+                    android:textColor="@color/Blue"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/first_class_price"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/second_class_txt"
+                    android:layout_alignStart="@+id/second_class_txt"
+                    android:layout_alignEnd="@+id/second_class_txt"
+
+                    android:gravity="center"
+                    android:text="50LE"
+                    android:textColor="@color/Blue"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/second_class_price"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/third_class_txt"
+                    android:layout_alignStart="@+id/third_class_txt"
+                    android:layout_alignEnd="@+id/third_class_txt"
+
+                    android:gravity="center"
+                    android:text="25LE"
+                    android:textColor="@color/Blue"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/third_class_price"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="5dp"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seats is: "
+                android:id="@+id/seats_is"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"
+                android:textColor="@color/Blue"
+                android:textSize="13sp"
+                />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/seats_is"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_margin="5dp"
+                    android:id="@+id/selected_seats"
+                    android:textColor="@color/Blue"
+                    android:textSize="13sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tickets price: "
+                    app:layout_constraintTop_toBottomOf="@id/seats_is"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_margin="5dp"
+                    android:id="@+id/tickets_price"
+                    android:textColor="@color/Blue"
+                    android:textSize="13sp"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/seats_is"
+                    app:layout_constraintStart_toEndOf="@id/tickets_price"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_margin="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/total_price"
+                    android:textColor="@color/Blue"
+                    android:textSize="13sp"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mybutton"
+            android:text="Book Now"
+            android:textColor="@color/Blue"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:id="@+id/book_bot"
+            />
+
+
+    </LinearLayout>
+
+
+</ScrollView>

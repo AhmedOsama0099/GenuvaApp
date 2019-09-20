@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/homeback"
+        tools:context=".HomeActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_name_app"
+            android:text="Genuva App"
+            android:textSize="50dp"
+
+            android:gravity="center"
+            android:textColor="@color/title_app"
+            android:layout_marginTop="70dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_name_app">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="18dp"
+                        android:layout_weight="1"
+                        android:background="@color/title_app">
+
+                        <ImageView
+                            android:id="@+id/image_sakia"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:src="@drawable/sakia" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image_sakia"
+                            android:layout_margin="6dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="6dp"
+                            android:gravity="center"
+                            android:text="Sakia El Sawy"
+                            android:textColor="@color/Blue"
+                            android:textSize="21dp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="18dp"
+                        android:layout_weight="1"
+                        android:background="@color/title_app">
+
+                        <ImageView
+                            android:id="@+id/image_opera"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:src="@drawable/opera_logo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image_opera"
+                            android:layout_margin="6dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="6dp"
+                            android:gravity="center"
+                            android:text="Opera House"
+                            android:textColor="@color/Blue"
+                            android:textSize="21dp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/btn_myTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@id/linear_layout"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/title_app"
+                    android:text="My Tickets"
+                    android:textAllCaps="false"
+                    android:textColor="@color/Blue"
+                    android:textSize="25dp"
+                    android:textStyle="normal" />
+
+                <Button
+                    android:id="@+id/createparty"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:text="Create Party"
+                    android:textSize="25dp"
+                    android:layout_marginTop="18dp"
+                    android:textColor="@color/Blue"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:background="@color/title_app"
+                    android:layout_below="@id/btn_myTickets"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@id/createparty"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/title_app"
+                    android:text="Logout"
+                    android:textAllCaps="false"
+                    android:textColor="#C40B0B"
+                    android:textSize="25dp"
+                    android:layout_marginBottom="60dp"/>
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Login_phone"
+    android:background="@drawable/img">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imge"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginRight="130dp"
+        android:gravity="center"
+        android:background="@drawable/ic_google_search" />
+
+    <EditText
+        android:id="@+id/edt_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginRight="19dp"
+        android:background="#fff"
+        android:layout_below="@id/imge"
+        android:hint="Enter Your Phone Number"
+        android:inputType="textEmailAddress"
+        android:paddingStart="20dp"
+        tools:ignore="MissingConstraints"
+        android:autofillHints="" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/edt_phone_number"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="19dp"
+        android:text="Get Verification Code"
+        android:background="#3FE6D6"
+        android:textSize="20dp"
+        android:id="@+id/btn_Getverification_Code"
+        />
+
+    <EditText
+        android:id="@+id/Code_sigin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/btn_Getverification_Code"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="19dp"
+        android:background="#fff"
+        android:hint="verification Code"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:maxLength="10"
+        android:paddingStart="20dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/confirmation_code"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/Code_sigin"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="19dp"
+        android:background="#3FE6D6"
+        android:text="Sigin"
+        android:textSize="26dp" />
+
+</RelativeLayout>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/homeback"
+    tools:context=".LoginActivity">
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title_App"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:text="@string/genuva_app"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="13dp"
+            android:textColor="@color/title_app"
+            android:textSize="60sp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@id/title_App"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/email_sigin"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="65dp"
+                    android:layout_marginRight="19dp"
+                    android:background="#8A8787"
+                    android:textColorHint="#fff"
+                    android:drawableStart="@drawable/ic_mail"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:padding="13dp"
+                    tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/password_sigin"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/email_sigin"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginRight="19dp"
+                    android:background="#8A8787"
+                    android:textColorHint="#fff"                    android:inputType="textPassword"
+                    android:maxLength="10"
+                    android:padding="13dp"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:paddingStart="9dp"
+                    android:hint="Password"
+                    tools:ignore="MissingConstraints"
+                    android:importantForAutofill="no" />
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/password_sigin"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginRight="19dp"
+                    android:background="@drawable/button"
+                    android:paddingStart="9dp"
+                    android:gravity="center"
+                    android:text="Login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/title_app"
+                    android:textSize="25dp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/text_forget_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_login"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="Forget Password ?"
+                    android:textColor="#8EA3E4"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_forget_pass"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="19dp"
+                    android:id="@+id/createAccount"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/title_app"
+                        android:text="Do not have account ? "/>
+
+                    <TextView
+                        android:id="@+id/intent_SignUp_activity_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sign up "
+                        android:textColor="#8EA3E4"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_Sigin_google"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_below="@id/createAccount"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="28dp"
+                    android:background="#8A8787"
+                    android:text="Sign in with gmail"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:padding="13dp"
+                    android:drawableStart="@drawable/ic_google_search"
+                    android:textColor="#fff"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_Sigin_PhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_below="@id/btn_Sigin_google"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="28dp"
+                    android:background="#8A8787"
+                    android:text="Sign in with Phone"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    android:padding="13dp"
+                    android:drawableStart="@drawable/ic_phone_call" />
+
+                <Button
+                    android:id="@+id/btn_Sigin_facebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_below="@id/btn_Sigin_PhoneNumber"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="28dp"
+                    android:background="#8A8787"
+                    android:text="Sign in with facebook"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:drawableStart="@drawable/ic_facebook"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:padding="13dp"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="60dp"
+                    />
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

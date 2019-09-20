@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295994077902",
+    "firebase_url": "https://genuvaapp-bd225.firebaseio.com",
+    "project_id": "genuvaapp-bd225",
+    "storage_bucket": "genuvaapp-bd225.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295994077902:android:fbe2d2b22e94d1091a169f",
+        "android_client_info": {
+          "package_name": "com.example.genuva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295994077902-9rct4vfah5liqnkf3eud6lqme60f1mtf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.genuva",
+            "certificate_hash": "1a55ba6bd963bb636dde1858dedf05c95371cbc6"
+          }
+        },
+        {
+          "client_id": "295994077902-n90rqegca3p34nq1gg8fc9uqeq0v76uo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8w2hD5ykt2k5cbDgB9DGTwnK2L1S4pZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295994077902-n90rqegca3p34nq1gg8fc9uqeq0v76uo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
