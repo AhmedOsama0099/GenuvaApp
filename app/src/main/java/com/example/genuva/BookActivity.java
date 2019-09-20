@@ -1,6 +1,5 @@
 package com.example.genuva;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,7 +29,6 @@ public class BookActivity extends AppCompatActivity {
     TextView selectedSeats,totalPrice;
     TextView firstclassprice,secondclassprice,thirdclassprice;
     ArrayList<String>arrofselectedchair=new ArrayList<>();
-    String x;
     int totalprice=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +87,6 @@ public class BookActivity extends AppCompatActivity {
         selectedSeats=findViewById(R.id.selected_seats);
         totalPrice=findViewById(R.id.total_price);
         totalPrice.setText("0");
-        //String x=new String();
-        //x=arr.get(1).getTicketPrice();
-        Toast.makeText(BookActivity.this,x,Toast.LENGTH_SHORT).show();
-        firstclassprice.setText("Asdad");
-        secondclassprice.setText("sad");
-        thirdclassprice.setText("asdasd");
-
         final Boolean[] selectedArrchk = new Boolean[30];
 
 
