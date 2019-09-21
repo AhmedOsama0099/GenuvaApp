@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class BookActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -50,13 +51,13 @@ public class BookActivity extends AppCompatActivity {
                         SeatsModel val = dataSnapshot.getValue(SeatsModel.class);
                         arr.add(val);
                         if(val.getId().equals("1")){
-                            firstclassprice.setText(val.getTicketPrice());
+                            firstclassprice.setText(val.getTicketPrice()+"L.E");
                         }
                         else if(val.getId().equals("11")){
-                            secondclassprice.setText(val.getTicketPrice());
+                            secondclassprice.setText(val.getTicketPrice()+"L.E");
                         }
                         else if(val.getId().equals("25")){
-                            thirdclassprice.setText(val.getTicketPrice());
+                            thirdclassprice.setText(val.getTicketPrice()+"L.E");
                         }
                         gridViewAdapter.notifyDataSetChanged();
                     }
@@ -103,22 +104,24 @@ public class BookActivity extends AppCompatActivity {
                         selectedchair.setImageResource(R.drawable.ic_chair);
                         selectedArrchk[i]=true;
                         arrofselectedchair.add(Integer.toString(i+1));
+                        print(arrofselectedchair);
+                        Collections.sort(arrofselectedchair);
+                        print(arrofselectedchair);
                         totalprice+=Integer.parseInt(arr.get(i).getTicketPrice());
                         totalPrice.setText(Integer.toString(totalprice));
-
                         for(int j=0;j<arrofselectedchair.size();j++){
-                            selectedtxt+=arrofselectedchair.get(j)+";";
+                                selectedtxt+=arrofselectedchair.get(j)+";";
                         }
                         selectedSeats.setText(selectedtxt);
+
                     }
                     else if(selectedArrchk[i]&&!arr.get(i).getSeat_state()){
                         ImageView selectedchair=view.findViewById(R.id.chair_img);
                         selectedchair.setImageResource(R.drawable.ic_seat_green);
                         selectedArrchk[i]=false;
-                        arrofselectedchair.remove(FindItemIndex(arrofselectedchair));
                         totalprice-=Integer.parseInt(arr.get(i).getTicketPrice());
                         totalPrice.setText(Integer.toString(totalprice));
-
+                        arrofselectedchair.remove(FindItemIndex(arrofselectedchair,i+1));
                         for(int j=0;j<arrofselectedchair.size();j++){
                             selectedtxt+=arrofselectedchair.get(j)+";";
                         }
@@ -155,23 +158,31 @@ public class BookActivity extends AppCompatActivity {
 
                         mRef.child(place).child(partyKey).child("Seats").child(arrofselectedchair.get(i)).child("seat_state").setValue(true);
                     }
+                    totalPrice.setText("0");
+                    selectedSeats.setText("");
                     Toast.makeText(BookActivity.this,"Done!",Toast.LENGTH_SHORT).show();
-
+                    arrofselectedchair.clear();
+                    Arrays.fill(selectedArrchk,Boolean.FALSE);
                 }
 
             }
         });
 
     }
-    public int FindItemIndex(ArrayList<String>arr){
+    public int FindItemIndex(ArrayList<String>arr,int chk){
         int x=0;
         for(int i=0;i<arr.size();i++){
-            if(arrofselectedchair.get(i).equals(i+1)){
+            if(arrofselectedchair.get(i).equals(Integer.toHexString(chk))){
                 x=i;
                 break;
             }
 
         }
         return x;
+    }
+    private void print(ArrayList<String>arr){
+        for(int i=0;i<arr.size();i++)
+            System.out.print(arr.get(i));
+        System.out.println();
     }
 }
