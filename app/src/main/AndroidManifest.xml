@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.genuva.CreateParty"></activity>
-        <activity android:name="com.example.genuva.Parties" />
-        <activity android:name="com.example.genuva.BookActivity" />
-        <activity android:name="com.example.genuva.Profile" />
-        <activity android:name="com.example.genuva.firebase.SignUp" />
-        <activity android:name="com.example.genuva.Upload_Image" />
-        <activity android:name="com.example.genuva.forget_Password" />
-        <activity android:name="com.example.genuva.HomeActivity" />
-        <activity android:name="com.example.genuva.Sigin_UP" />
-        <activity android:name="com.example.genuva.Login_phone" />
-        <activity android:name="com.example.genuva.LoginActivity" />
+        <activity android:name=".CreateParty" />
+        <activity android:name=".Parties" />
+        <activity android:name=".BookActivity" />
+        <activity android:name=".Profile" />
+        <activity android:name=".firebase.SignUp" />
+        <activity android:name=".Upload_Image" />
+        <activity android:name=".forget_Password" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".Sigin_UP" />
+        <activity android:name=".Login_phone" />
+        <activity android:name=".LoginActivity" />
         <activity
-            android:name="com.example.genuva.SplashScreen"
+            android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

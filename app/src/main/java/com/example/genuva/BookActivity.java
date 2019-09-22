@@ -1,5 +1,7 @@
 package com.example.genuva;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +35,7 @@ public class BookActivity extends AppCompatActivity {
     TextView firstclassprice,secondclassprice,thirdclassprice;
     ArrayList<String>arrofselectedchair=new ArrayList<>();
     int totalprice=0;
+    String selectedtxt=new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +102,7 @@ public class BookActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedtxt=new String();
+                selectedtxt = new String();
                 if(!arr.get(i).getSeat_state()){
                     if(!selectedArrchk[i]){
                         ImageView selectedchair=view.findViewById(R.id.chair_img);
@@ -110,7 +115,9 @@ public class BookActivity extends AppCompatActivity {
                         totalprice+=Integer.parseInt(arr.get(i).getTicketPrice());
                         totalPrice.setText(Integer.toString(totalprice));
                         for(int j=0;j<arrofselectedchair.size();j++){
+                            if (!(arrofselectedchair.get(j).equals(""))){
                                 selectedtxt+=arrofselectedchair.get(j)+";";
+                            }
                         }
                         selectedSeats.setText(selectedtxt);
 
@@ -121,9 +128,12 @@ public class BookActivity extends AppCompatActivity {
                         selectedArrchk[i]=false;
                         totalprice-=Integer.parseInt(arr.get(i).getTicketPrice());
                         totalPrice.setText(Integer.toString(totalprice));
-                        arrofselectedchair.remove(FindItemIndex(arrofselectedchair,i+1));
+                        arrofselectedchair.set(FindItemIndex(arrofselectedchair,i),"");
+                        selectedtxt = new String();
                         for(int j=0;j<arrofselectedchair.size();j++){
-                            selectedtxt+=arrofselectedchair.get(j)+";";
+                            if (!(arrofselectedchair.get(j).equals(""))){
+                                selectedtxt+=arrofselectedchair.get(j)+";";
+                            }
                         }
                         selectedSeats.setText(selectedtxt);
                     }
@@ -154,13 +164,18 @@ public class BookActivity extends AppCompatActivity {
                     Toast.makeText(BookActivity.this,"Thier is no seleced seat",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                    String id = user.getUid();
                     for(int i=0;i<arrofselectedchair.size();i++){
 
                         mRef.child(place).child(partyKey).child("Seats").child(arrofselectedchair.get(i)).child("seat_state").setValue(true);
+                        mRef.child("Users").child(id).child("place").child(place).child(partyKey).child("Seats").child(arrofselectedchair.get(i)).setValue(arrofselectedchair.get(i));
                     }
                     totalPrice.setText("0");
                     selectedSeats.setText("");
-                    Toast.makeText(BookActivity.this,"Done!",Toast.LENGTH_SHORT).show();
+
+
+                    Toast.makeText(BookActivity.this,id,Toast.LENGTH_SHORT).show();
                     arrofselectedchair.clear();
                     Arrays.fill(selectedArrchk,Boolean.FALSE);
                 }
@@ -169,10 +184,10 @@ public class BookActivity extends AppCompatActivity {
         });
 
     }
-    public int FindItemIndex(ArrayList<String>arr,int chk){
+    public int FindItemIndex(ArrayList<String>arr,int j){
         int x=0;
         for(int i=0;i<arr.size();i++){
-            if(arrofselectedchair.get(i).equals(Integer.toHexString(chk))){
+            if(arrofselectedchair.get(i).equals(Integer.toString(j+1))){
                 x=i;
                 break;
             }

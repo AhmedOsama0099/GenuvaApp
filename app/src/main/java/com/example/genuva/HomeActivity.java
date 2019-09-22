@@ -14,6 +14,7 @@ public  class HomeActivity extends AppCompatActivity {
 
     Button btn_LogOut;
     Button btn_CreateParty;
+    Button btn_myTickets;
     private FirebaseAuth mauthlogout;
 
     ImageView imageViewSaqia , imageViewOperaHouse;
@@ -28,6 +29,7 @@ public  class HomeActivity extends AppCompatActivity {
         btn_CreateParty = findViewById(R.id.createparty);
         imageViewSaqia = findViewById(R.id.image_sakia);
         imageViewOperaHouse = findViewById(R.id.image_opera);
+        btn_myTickets = findViewById(R.id.btn_myTickets);
 
 
         imageViewSaqia.setOnClickListener(new View.OnClickListener() {
@@ -65,5 +67,6 @@ public  class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this , LoginActivity.class));
             }
         });
+
     }
 }
