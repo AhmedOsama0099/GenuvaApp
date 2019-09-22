@@ -1,7 +1,5 @@
 package com.example.genuva;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,17 +23,17 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class BookActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
     ArrayList<SeatsModel> arr = new ArrayList<>();
-    TextView selectedSeats,totalPrice;
-    TextView firstclassprice,secondclassprice,thirdclassprice;
-    ArrayList<String>arrofselectedchair=new ArrayList<>();
-    int totalprice=0;
-    String selectedtxt=new String();
+    TextView selectedSeats, totalPrice;
+    TextView firstclassprice, secondclassprice, thirdclassprice;
+    Boolean[] selectedArrchk = new Boolean[30];
+    int totalprice = 0;
+    String selectedtxt = new String();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,23 +44,21 @@ public class BookActivity extends AppCompatActivity {
         final String partyKey = bundle.getString("partyKey");
         final GridViewAdapter gridViewAdapter = new GridViewAdapter(arr, BookActivity.this);
         gridView.setAdapter(gridViewAdapter);
-        firstclassprice=findViewById(R.id.first_class_price);
-        secondclassprice=findViewById(R.id.second_class_price);
-        thirdclassprice=findViewById(R.id.third_class_price);
+        firstclassprice = findViewById(R.id.first_class_price);
+        secondclassprice = findViewById(R.id.second_class_price);
+        thirdclassprice = findViewById(R.id.third_class_price);
         mRef.child(place).child(partyKey).child("Seats")
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         SeatsModel val = dataSnapshot.getValue(SeatsModel.class);
                         arr.add(val);
-                        if(val.getId().equals("1")){
-                            firstclassprice.setText(val.getTicketPrice()+"L.E");
-                        }
-                        else if(val.getId().equals("11")){
-                            secondclassprice.setText(val.getTicketPrice()+"L.E");
-                        }
-                        else if(val.getId().equals("25")){
-                            thirdclassprice.setText(val.getTicketPrice()+"L.E");
+                        if (val.getId().equals("1")) {
+                            firstclassprice.setText(val.getTicketPrice() + "L.E");
+                        } else if (val.getId().equals("11")) {
+                            secondclassprice.setText(val.getTicketPrice() + "L.E");
+                        } else if (val.getId().equals("25")) {
+                            thirdclassprice.setText(val.getTicketPrice() + "L.E");
                         }
                         gridViewAdapter.notifyDataSetChanged();
                     }
@@ -70,7 +66,7 @@ public class BookActivity extends AppCompatActivity {
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         SeatsModel val = dataSnapshot.getValue(SeatsModel.class);
-                        arr.set(Integer.parseInt(val.getId())-1,val);
+                        arr.set(Integer.parseInt(val.getId()) - 1, val);
                         gridViewAdapter.notifyDataSetChanged();
                     }
 
@@ -90,69 +86,55 @@ public class BookActivity extends AppCompatActivity {
                     }
                 });
 
-        selectedSeats=findViewById(R.id.selected_seats);
-        totalPrice=findViewById(R.id.total_price);
+        selectedSeats = findViewById(R.id.selected_seats);
+        totalPrice = findViewById(R.id.total_price);
         totalPrice.setText("0");
-        final Boolean[] selectedArrchk = new Boolean[30];
 
 
         Arrays.fill(selectedArrchk, Boolean.FALSE);
-
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedtxt = new String();
-                if(!arr.get(i).getSeat_state()){
-                    if(!selectedArrchk[i]){
-                        ImageView selectedchair=view.findViewById(R.id.chair_img);
+                if (!arr.get(i).getSeat_state()) {
+                    if (!selectedArrchk[i]) {
+                        ImageView selectedchair = view.findViewById(R.id.chair_img);
                         selectedchair.setImageResource(R.drawable.ic_chair);
-                        selectedArrchk[i]=true;
-                        arrofselectedchair.add(Integer.toString(i+1));
-                        print(arrofselectedchair);
-                        Collections.sort(arrofselectedchair);
-                        print(arrofselectedchair);
-                        totalprice+=Integer.parseInt(arr.get(i).getTicketPrice());
+                        selectedArrchk[i] = true;
+                        totalprice += Integer.parseInt(arr.get(i).getTicketPrice());
                         totalPrice.setText(Integer.toString(totalprice));
-                        for(int j=0;j<arrofselectedchair.size();j++){
-                            if (!(arrofselectedchair.get(j).equals(""))){
-                                selectedtxt+=arrofselectedchair.get(j)+";";
-                            }
+                        for (int j = 0; j < selectedArrchk.length; j++) {
+                            if (selectedArrchk[j])
+                                selectedtxt += (j + 1) + ";";
                         }
                         selectedSeats.setText(selectedtxt);
 
-                    }
-                    else if(selectedArrchk[i]&&!arr.get(i).getSeat_state()){
-                        ImageView selectedchair=view.findViewById(R.id.chair_img);
+                    } else if (selectedArrchk[i] && !arr.get(i).getSeat_state()) {
+                        ImageView selectedchair = view.findViewById(R.id.chair_img);
                         selectedchair.setImageResource(R.drawable.ic_seat_green);
-                        selectedArrchk[i]=false;
-                        totalprice-=Integer.parseInt(arr.get(i).getTicketPrice());
+                        selectedArrchk[i] = false;
+                        totalprice -= Integer.parseInt(arr.get(i).getTicketPrice());
                         totalPrice.setText(Integer.toString(totalprice));
-                        arrofselectedchair.set(FindItemIndex(arrofselectedchair,i),"");
-                        selectedtxt = new String();
-                        for(int j=0;j<arrofselectedchair.size();j++){
-                            if (!(arrofselectedchair.get(j).equals(""))){
-                                selectedtxt+=arrofselectedchair.get(j)+";";
-                            }
+                        for (int j = 0; j < selectedArrchk.length; j++) {
+                            if (selectedArrchk[j])
+                                selectedtxt += (j + 1) + ";";
                         }
                         selectedSeats.setText(selectedtxt);
-                    }
-                    else{
-                        ImageView selectedchair=view.findViewById(R.id.chair_img);
+                    } else {
+                        ImageView selectedchair = view.findViewById(R.id.chair_img);
                         selectedchair.setImageResource(R.drawable.ic_seat_red);
-                        selectedArrchk[i]=false;
+                        selectedArrchk[i] = false;
                         totalPrice.setText(Integer.toString(totalprice));
-                        totalprice-=Integer.parseInt(arr.get(i).getTicketPrice());
+                        totalprice -= Integer.parseInt(arr.get(i).getTicketPrice());
                         totalPrice.setText(Integer.toString(totalprice));
 
-                        for(int j=0;j<arrofselectedchair.size();j++){
-                            selectedtxt+=arrofselectedchair.get(j)+";";
+                        for (int j = 0; j < selectedArrchk.length; j++) {
+                            selectedtxt += j + ";";
                         }
                         selectedSeats.setText(selectedtxt);
                     }
-                }
-                else{
-                    Toast.makeText(BookActivity.this,"This plce Has Been Taken",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(BookActivity.this, "This place Has Been Taken", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -160,44 +142,33 @@ public class BookActivity extends AppCompatActivity {
         bookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(arrofselectedchair.isEmpty()){
-                    Toast.makeText(BookActivity.this,"Thier is no seleced seat",Toast.LENGTH_SHORT).show();
+                Boolean chk = false;
+                for (int i = 0; i < selectedArrchk.length; i++) {
+                    if (selectedArrchk[i]) {
+                        chk = true;
+                        break;
+                    }
                 }
-                else{
-                    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                if (!chk) {
+                    Toast.makeText(BookActivity.this, "There is no selected seat", Toast.LENGTH_SHORT).show();
+                } else {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     String id = user.getUid();
-                    for(int i=0;i<arrofselectedchair.size();i++){
-
-                        mRef.child(place).child(partyKey).child("Seats").child(arrofselectedchair.get(i)).child("seat_state").setValue(true);
-                        mRef.child("Users").child(id).child("place").child(place).child(partyKey).child("Seats").child(arrofselectedchair.get(i)).setValue(arrofselectedchair.get(i));
+                    for (int i = 0; i < selectedArrchk.length; i++) {
+                        if (selectedArrchk[i]) {
+                            mRef.child(place).child(partyKey).child("Seats").child(Integer.toString(i + 1)).child("seat_state").setValue(true);
+                            mRef.child("Users").child(id).child("place").child(place).child(partyKey).child("Seats").child(Integer.toString(i + 1)).setValue(Integer.toString(i + 1));
+                        }
                     }
                     totalPrice.setText("0");
                     selectedSeats.setText("");
-
-
-                    Toast.makeText(BookActivity.this,id,Toast.LENGTH_SHORT).show();
-                    arrofselectedchair.clear();
-                    Arrays.fill(selectedArrchk,Boolean.FALSE);
+                    Arrays.fill(selectedArrchk, Boolean.FALSE);
+                    Toast.makeText(BookActivity.this,"Done!",Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
     }
-    public int FindItemIndex(ArrayList<String>arr,int j){
-        int x=0;
-        for(int i=0;i<arr.size();i++){
-            if(arrofselectedchair.get(i).equals(Integer.toString(j+1))){
-                x=i;
-                break;
-            }
 
-        }
-        return x;
-    }
-    private void print(ArrayList<String>arr){
-        for(int i=0;i<arr.size();i++)
-            System.out.print(arr.get(i));
-        System.out.println();
-    }
 }
