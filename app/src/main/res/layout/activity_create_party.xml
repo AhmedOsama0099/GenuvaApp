@@ -35,12 +35,13 @@
             android:layout_marginTop="15dp"
             >
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Party Time"
                 android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
                 android:id="@+id/party_time"
+
                 />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -79,6 +80,7 @@
             android:hint="First class"
             android:layout_margin="5dp"
             android:id="@+id/first_class_p"
+            android:inputType="phone"
             />
         <EditText
             android:layout_width="0dp"
@@ -87,6 +89,7 @@
             android:hint="Second class"
             android:layout_margin="5dp"
             android:id="@+id/second_class_p"
+            android:inputType="phone"
             />
         <EditText
             android:layout_width="0dp"
@@ -95,6 +98,7 @@
             android:hint="Third class"
             android:layout_margin="5dp"
             android:id="@+id/third_class_p"
+            android:inputType="phone"
             />
     </LinearLayout>
     <androidx.cardview.widget.CardView

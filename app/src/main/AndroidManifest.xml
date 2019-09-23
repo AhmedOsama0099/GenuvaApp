@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BookedSeatsActivity"></activity>
         <activity android:name=".CreateParty" />
         <activity android:name=".Parties" />
         <activity android:name=".BookActivity" />

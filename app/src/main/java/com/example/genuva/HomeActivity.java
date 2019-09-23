@@ -67,6 +67,13 @@ public  class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this , LoginActivity.class));
             }
         });
+        btn_myTickets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this,BookedSeatsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

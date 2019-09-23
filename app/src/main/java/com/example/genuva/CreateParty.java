@@ -1,15 +1,20 @@
 package com.example.genuva;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,8 +28,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+
 public class CreateParty extends AppCompatActivity implements View.OnClickListener {
-    EditText partyName, partyTime, firstclass, secondclass, thirdclass;
+    EditText partyName, firstclass, secondclass, thirdclass;
+    TextView partyTime;
     Button select_img, creat_new_party;
     ImageView party_img_view;
     RadioGroup radgroup;
@@ -34,7 +43,8 @@ public class CreateParty extends AppCompatActivity implements View.OnClickListen
     ProgressDialog mProgress;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-
+    int yearr,dayy;
+    String monthh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +54,37 @@ public class CreateParty extends AppCompatActivity implements View.OnClickListen
         party_img_view = findViewById(R.id.party_img_view_selected);
         partyName = findViewById(R.id.party_name);
         partyTime = findViewById(R.id.party_time);
+        partyTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c=Calendar.getInstance();
+                int this_year=c.get(Calendar.YEAR);
+                int this_month=c.get(Calendar.MONTH);
+                int this_date=c.get(Calendar.DATE);
+                DatePickerDialog datePickerDialog=new DatePickerDialog(CreateParty.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        yearr=year;
+                        monthh=new DateFormatSymbols().getMonths()[month-1];
+                        dayy=dayOfMonth;
+
+
+                        int hour=c.get(Calendar.HOUR);
+                        int mint=c.get(Calendar.MINUTE);
+                        TimePickerDialog timePickerDialog=new TimePickerDialog(CreateParty.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                partyTime.setText(hourOfDay+":"+minute+","+dayy+" "+ monthh+" "+yearr);
+                            }
+                        },hour,mint,true);
+                        timePickerDialog.show();
+
+                    }
+                },this_year,this_month,this_date);
+                datePickerDialog.show();
+
+            }
+        });
         firstclass = findViewById(R.id.first_class_p);
         secondclass = findViewById(R.id.second_class_p);
         thirdclass = findViewById(R.id.third_class_p);
@@ -130,4 +171,6 @@ public class CreateParty extends AppCompatActivity implements View.OnClickListen
             Selectimg();
         }
     }
+
+
 }

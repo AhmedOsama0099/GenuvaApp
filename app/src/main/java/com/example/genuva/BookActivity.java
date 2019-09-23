@@ -27,6 +27,8 @@ import java.util.Arrays;
 public class BookActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String id = user.getUid();
     ArrayList<SeatsModel> arr = new ArrayList<>();
     TextView selectedSeats, totalPrice;
     TextView firstclassprice, secondclassprice, thirdclassprice;
@@ -47,6 +49,7 @@ public class BookActivity extends AppCompatActivity {
         firstclassprice = findViewById(R.id.first_class_price);
         secondclassprice = findViewById(R.id.second_class_price);
         thirdclassprice = findViewById(R.id.third_class_price);
+
         mRef.child(place).child(partyKey).child("Seats")
                 .addChildEventListener(new ChildEventListener() {
                     @Override
@@ -63,10 +66,28 @@ public class BookActivity extends AppCompatActivity {
                         gridViewAdapter.notifyDataSetChanged();
                     }
 
+
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         SeatsModel val = dataSnapshot.getValue(SeatsModel.class);
                         arr.set(Integer.parseInt(val.getId()) - 1, val);
+                        if(selectedArrchk[Integer.parseInt(val.getId())-1]){
+                            String selectedPlaces=selectedSeats.getText().toString();
+                            String[]eachseat=selectedPlaces.split(";");
+                            String temp=new String();
+                            String id=val.getId();
+                            for(int i=0;i<eachseat.length;i++){
+                                if(!id.equals(eachseat[i])){
+                                    temp+=eachseat[i]+";";
+                                }
+
+                            }
+                       //     totalPrice.setText(Integer.toString(totprice));
+                            selectedSeats.setText(temp);
+
+                            selectedArrchk[Integer.parseInt(val.getId())-1]=false;
+                        }
+
                         gridViewAdapter.notifyDataSetChanged();
                     }
 
@@ -152,14 +173,14 @@ public class BookActivity extends AppCompatActivity {
                 if (!chk) {
                     Toast.makeText(BookActivity.this, "There is no selected seat", Toast.LENGTH_SHORT).show();
                 } else {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    String id = user.getUid();
+
                     for (int i = 0; i < selectedArrchk.length; i++) {
                         if (selectedArrchk[i]) {
                             mRef.child(place).child(partyKey).child("Seats").child(Integer.toString(i + 1)).child("seat_state").setValue(true);
                             mRef.child("Users").child(id).child("place").child(place).child(partyKey).child("Seats").child(Integer.toString(i + 1)).setValue(Integer.toString(i + 1));
                         }
                     }
+                    mRef.child("Users").child(id).child("place").child(place).child(partyKey).child("TotalPrice").setValue(Integer.toString(totalprice));
                     totalPrice.setText("0");
                     selectedSeats.setText("");
                     Arrays.fill(selectedArrchk, Boolean.FALSE);
