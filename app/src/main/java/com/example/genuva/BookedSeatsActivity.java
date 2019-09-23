@@ -34,6 +34,7 @@ public class BookedSeatsActivity extends AppCompatActivity {
         userParties.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         addapter=new UsersPartiesRecycleViewAddapter(userPartiesModelsArr,this);
         userParties.setAdapter(addapter);
+        //
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
