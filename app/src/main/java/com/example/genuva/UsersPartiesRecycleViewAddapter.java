@@ -27,7 +27,7 @@ public class UsersPartiesRecycleViewAddapter extends RecyclerView.Adapter<UsersP
     DatabaseReference mRef = database.getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userId = user.getUid();
-
+//
     public UsersPartiesRecycleViewAddapter(ArrayList<UserPartiesModel> arr, Context context) {
         this.arr = arr;
         this.context = context;
