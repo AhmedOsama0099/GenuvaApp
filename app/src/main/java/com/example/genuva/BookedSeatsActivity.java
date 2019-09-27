@@ -45,8 +45,9 @@ public class BookedSeatsActivity extends AppCompatActivity {
                 for (DataSnapshot datt : dataSnapshot.child("Users").child(userId).child("place").getChildren()) {
                     partiesPlace.add(datt.getKey());
                 }
+                DataSnapshot datacommer=dataSnapshot.child("Users").child(userId).child("place");
                 for (int i = 0; i < partiesPlace.size(); i++) {
-                    for (DataSnapshot datt : dataSnapshot.child("Users").child(userId).child("place").child(partiesPlace.get(i)).getChildren()) {
+                    for (DataSnapshot datt :datacommer.child(partiesPlace.get(i)).getChildren()) {
                         String partyId = datt.getKey();
                         String partyName = dataSnapshot.child(partiesPlace.get(i)).child(datt.getKey()).child("partyName").getValue(String.class);
                         String partyTime = dataSnapshot.child(partiesPlace.get(i)).child(datt.getKey()).child("partyTime").getValue(String.class);
@@ -58,9 +59,10 @@ public class BookedSeatsActivity extends AppCompatActivity {
                         String []count=seatsNumbers.split(";");
                         int seatsCount=count.length;
                         userPartiesModelsArr.add(new UserPartiesModel(partiesPlace.get(i), partyId, partyName,partyTime,partyPrice,seatsNumbers,seatsCount));
+                        addapter.notifyDataSetChanged();
                     }
                 }
-                addapter.notifyDataSetChanged();
+
 
             }
 
