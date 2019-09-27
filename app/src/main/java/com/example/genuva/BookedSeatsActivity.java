@@ -1,6 +1,8 @@
 package com.example.genuva;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,7 @@ public class BookedSeatsActivity extends AppCompatActivity {
     ArrayList<UserPartiesModel> userPartiesModelsArr = new ArrayList<>();
     RecyclerView userParties;
     UsersPartiesRecycleViewAddapter addapter;
+    Button btn_del;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,7 @@ public class BookedSeatsActivity extends AppCompatActivity {
                 }
                 for (int i = 0; i < partiesPlace.size(); i++) {
                     for (DataSnapshot datt : dataSnapshot.child("Users").child(userId).child("place").child(partiesPlace.get(i)).getChildren()) {
+                        String partyId = datt.getKey();
                         String partyName = dataSnapshot.child(partiesPlace.get(i)).child(datt.getKey()).child("partyName").getValue(String.class);
                         String partyTime = dataSnapshot.child(partiesPlace.get(i)).child(datt.getKey()).child("partyTime").getValue(String.class);
                         String partyPrice=datt.child("TotalPrice").getValue(String.class)+"L.E";
@@ -53,7 +57,7 @@ public class BookedSeatsActivity extends AppCompatActivity {
                         }
                         String []count=seatsNumbers.split(";");
                         int seatsCount=count.length;
-                        userPartiesModelsArr.add(new UserPartiesModel(partyName,partyTime,partyPrice,seatsNumbers,seatsCount));
+                        userPartiesModelsArr.add(new UserPartiesModel(partiesPlace.get(i), partyId, partyName,partyTime,partyPrice,seatsNumbers,seatsCount));
                     }
                 }
                 addapter.notifyDataSetChanged();
@@ -65,6 +69,8 @@ public class BookedSeatsActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 }
