@@ -75,7 +75,8 @@ public class UsersPartiesRecycleViewAddapter extends RecyclerView.Adapter<UsersP
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             ArrayList<String> seats = new ArrayList<>();
-                            for (DataSnapshot dat : dataSnapshot.child("Users").child(userId).child("place").child(arr.get(getAdapterPosition()).getPartyPlace()).
+                            DataSnapshot datacomer=dataSnapshot.child("Users").child(userId).child("place");
+                            for (DataSnapshot dat : datacomer.child(arr.get(getAdapterPosition()).getPartyPlace()).
                                     child(arr.get(getAdapterPosition()).getPartyId()).child("Seats").getChildren()){
 
                                 seats.add(dat.getKey());
