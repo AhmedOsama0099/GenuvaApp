@@ -112,8 +112,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                signIn(edt_Email_signIn.getText().toString() , edt_password_signIn.getText().toString());
 
-                Intent home = new Intent(LoginActivity.this , HomeActivity.class);
-                startActivity(home);
+
             }
         });
     }
@@ -182,6 +181,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful())
                 {
                     Toast.makeText(LoginActivity.this , "Login Successful ^ _ ^" , Toast.LENGTH_SHORT).show();
+                    Intent home = new Intent(LoginActivity.this , HomeActivity.class);
+                    startActivity(home);
                 }else
                 {
                     Toast.makeText(LoginActivity.this , "login UnSuccessful ^ ~ ^" , Toast.LENGTH_SHORT).show();
